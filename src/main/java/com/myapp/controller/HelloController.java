@@ -9,7 +9,8 @@ import com.myapp.Couch;
 import com.utils.Months;
 
 
-// create multiple class from months interface and use @Qualifier to identify whish one will the constructor inject   
+// create multiple class from months interface and use @Qualifier to identify whish one will the constructor inject 
+// use the field injection  
 
 @RestController
 public class HelloController {
