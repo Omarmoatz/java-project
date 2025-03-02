@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myapp.Couch;
 import com.utils.Months;
 
+
+// create multiple class from months interface and use @Qualifier to identify whish one will the constructor inject   
+
 @RestController
 public class HelloController {
     
