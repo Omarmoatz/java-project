@@ -1,4 +1,4 @@
-package com.mycolap.spring_boot.demo.controller;
+package com.myapp.spring_boot.demo.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

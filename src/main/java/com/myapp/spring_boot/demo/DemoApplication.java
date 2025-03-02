@@ -1,4 +1,4 @@
-package com.mycolap.spring_boot.demo;
+package com.myapp.spring_boot.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
