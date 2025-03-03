@@ -1,6 +1,7 @@
 package com.myapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,12 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.myapp.Couch;
 import com.utils.Months;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
-// create multiple class from months interface and use @Qualifier to identify whish one will the constructor inject 
-// use the field injection  
+
+// @primary , lazy initialization(global, @lazy) , @scope
+ 
 
 @RestController
-public class HelloController {
+public class DemoController {
     
     @Value("${owner.name}")
     private String myName;
@@ -22,14 +26,37 @@ public class HelloController {
     private String myTeam;
 
     // dependencies
+    @Autowired  // for field injection
     private Couch myCouch;
+    
+    private Months anotherMonth;
     private Months month;
 
     
     @Autowired   // for dependency injection  
-    private HelloController(Couch couch, Months month){
-        this.myCouch = couch;
+    private DemoController(
+        @Qualifier("eid") Months month,
+        @Qualifier("ramadan") Months anotherMonth
+    ){
+        System.out.println("in constructor DemoController");
+        // this.myCouch = couch;
         this.month = month;
+        this.anotherMonth = anotherMonth;
+    }
+
+    @PostConstruct
+    public void myStartingCode(){
+        System.out.println("this is my---Stating---Code");
+    }
+
+    @PreDestroy
+    public void preDestroyCode(){
+        System.out.println("this is pre---Destroy---Code");
+    }
+
+    @GetMapping("/check")
+    public String check(){
+        return "is month = another month >>>>>>  " + (month == anotherMonth);
     }
 
     @GetMapping("/get-workout")
